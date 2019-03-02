@@ -28,7 +28,7 @@ window.onload = () => {
 // Handler functions //
 // ----------------- //
 
-function handlerToggleLed() {
+function deviceRun() {
     ledState = !ledState;
 
     uiToggleLedButton(ledState);
@@ -284,6 +284,9 @@ function getStatus() {
     }).done(function(data) {
         console.log(JSON.stringify(data));
         $("#test").text(data.title);
+        if (data.title == 1) {
+            deviceRun();
+        }
     }).fail(function(jqXHR, textStatus) {
         console.log("error occured");
         $("#test").text("error occured");
