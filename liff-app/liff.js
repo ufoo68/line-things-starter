@@ -13,7 +13,7 @@ let ledState = false; // true: LED on, false: LED off
 let clickCount = 0;
 
 // 設定値
-const URI = 'http://localhost:3000/posts/1';
+const URI = 'http://connect-cube.work/tg/checker.html?cid=1';
 const POLLLING_INVERVAL_TIME_IN_MILLIS = 1000;//10s
 
 // -------------- //
@@ -284,8 +284,8 @@ function getStatus() {
     }).done(function(data) {
         console.log(JSON.stringify(data));
         $("#test").text(data.title);
-        if (data.title == 1) {
-            deviceRun();
+        if (data.result == 0) {
+            // deviceRun();
         }
     }).fail(function(jqXHR, textStatus) {
         console.log("error occured");
