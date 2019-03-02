@@ -12,6 +12,10 @@ const PSDI_CHARACTERISTIC_UUID  = '26E2B12B-85F0-4F3F-9FDD-91D114270E6E';
 let ledState = false; // true: LED on, false: LED off
 let clickCount = 0;
 
+// 設定値
+const URI = 'http://localhost:3000/posts/1';
+const POLLLING_INVERVAL_TIME_IN_MILLIS = 1000;//10s
+
 // -------------- //
 // On window load //
 // -------------- //
@@ -130,6 +134,7 @@ function makeErrorMsg(errorObj) {
 
 function initializeApp() {
     liff.init(() => initializeLiff(), error => uiStatusError(makeErrorMsg(error), false));
+    polling();
 }
 
 function initializeLiff() {
@@ -268,4 +273,24 @@ function liffToggleDeviceLedState(state) {
     ).catch(error => {
         uiStatusError(makeErrorMsg(error), false);
     });
+}
+
+function getStatus() {
+    $.ajax({
+        type : "GET",
+        url : URI,
+        content : "application/json",
+        dataType : "json",
+    }).done(function(data) {
+        console.log(JSON.stringify(data));
+        $("#test").text(data.title);
+    }).fail(function(jqXHR, textStatus) {
+        console.log("error occured");
+        $("#test").text("error occured");
+    });
+}
+
+function polling() {
+    getStatus();
+    window.setTimeout(polling, POLLLING_INVERVAL_TIME_IN_MILLIS);
 }
