@@ -31,7 +31,7 @@ window.onload = () => {
 function deviceRun() {
     ledState = !ledState;
 
-    uiToggleLedButton(ledState);
+    // uiToggleLedButton(ledState);
     liffToggleDeviceLedState(ledState);
 }
 
@@ -269,7 +269,8 @@ function liffToggleDeviceLedState(state) {
     // on: 0x01
     // off: 0x00
     window.ledCharacteristic.writeValue(
-        state ? new Uint8Array([0x01]) : new Uint8Array([0x00])
+        // state ? new Uint8Array([0x01]) : new Uint8Array([0x00])
+        new Uint8Array([0x01])
     ).catch(error => {
         uiStatusError(makeErrorMsg(error), false);
     });
@@ -285,7 +286,8 @@ function getStatus() {
         console.log(JSON.stringify(data));
         $("#test").text(data.title);
         if (data.result == 0) {
-            // deviceRun();
+            console.log("device run!!!");
+            deviceRun();
         }
     }).fail(function(jqXHR, textStatus) {
         console.log("error occured");
