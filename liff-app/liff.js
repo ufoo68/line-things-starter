@@ -13,7 +13,7 @@ let ledState = false; // true: LED on, false: LED off
 let clickCount = 0;
 
 // 設定値
-const URI = 'http://connect-cube.work/tg/checker.html?cid=1';
+const URI = 'https://connect-cube.work/tg/checker.html?cid=1';
 const POLLLING_INVERVAL_TIME_IN_MILLIS = 1000;//10s
 
 // -------------- //
