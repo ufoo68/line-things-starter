@@ -268,6 +268,7 @@ function liffGetButtonStateCharacteristic(characteristic) {
 function liffToggleDeviceLedState(state) {
     // on: 0x01
     // off: 0x00
+    $("#test").text("signal on");
     window.ledCharacteristic.writeValue(
         // state ? new Uint8Array([0x01]) : new Uint8Array([0x00])
         new Uint8Array([0x01])
@@ -286,7 +287,6 @@ function getStatus() {
         console.log(JSON.stringify(data));
         $("#test").text(JSON.stringify(data));
         if (data.result == 0) {
-            console.log("device run!!!");
             deviceRun();
         }
     }).fail(function(jqXHR, textStatus) {
