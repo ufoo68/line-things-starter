@@ -28,11 +28,11 @@ window.onload = () => {
 // Handler functions //
 // ----------------- //
 
-function deviceRun() {
+function deviceRun(id) {
     ledState = !ledState;
 
     // uiToggleLedButton(ledState);
-    liffToggleDeviceLedState(ledState);
+    liffToggleDeviceLedState(id);
 }
 
 // ------------ //
@@ -225,7 +225,7 @@ function liffGetUserService(service) {
         window.ledCharacteristic = characteristic;
 
         // Switch off by default
-        liffToggleDeviceLedState(false);
+        liffToggleDeviceLedState(0);
     }).catch(error => {
         uiStatusError(makeErrorMsg(error), false);
     });
@@ -265,16 +265,37 @@ function liffGetButtonStateCharacteristic(characteristic) {
     });
 }
 
-function liffToggleDeviceLedState(state) {
+function liffToggleDeviceLedState(id) {
     // on: 0x01
     // off: 0x00
-    $("#test").text("signal on");
-    window.ledCharacteristic.writeValue(
-        // state ? new Uint8Array([0x01]) : new Uint8Array([0x00])
-        new Uint8Array([0x01])
-    ).catch(error => {
-        uiStatusError(makeErrorMsg(error), false);
-    });
+    if (id == 1) {
+        console.log("signal on id: " + id);
+        $("#test").text("signal on id: " + id);
+        window.ledCharacteristic.writeValue(
+            // state ? new Uint8Array([0x01]) : new Uint8Array([0x00])
+            new Uint8Array([0x01])
+        ).catch(error => {
+            uiStatusError(makeErrorMsg(error), false);
+        });
+    } else if (id == 2) {
+        console.log("signal on id: " + id);
+        $("#test").text("signal on id: " + id);
+        window.ledCharacteristic.writeValue(
+            // state ? new Uint8Array([0x01]) : new Uint8Array([0x00])
+            new Uint8Array([0x02])
+        ).catch(error => {
+            uiStatusError(makeErrorMsg(error), false);
+        });
+    } else if (id == 3) {
+        console.log("signal on id: " + id);
+        $("#test").text("signal on id: " + id);
+        window.ledCharacteristic.writeValue(
+            // state ? new Uint8Array([0x01]) : new Uint8Array([0x00])
+            new Uint8Array([0x03])
+        ).catch(error => {
+            uiStatusError(makeErrorMsg(error), false);
+        });
+    }
 }
 
 function getStatus() {
@@ -287,7 +308,7 @@ function getStatus() {
         console.log(JSON.stringify(data));
         $("#test").text(JSON.stringify(data));
         if (data.result == 0) {
-            deviceRun();
+            deviceRun(data.characterId);
         }
     }).fail(function(jqXHR, textStatus) {
         console.log(URI + ": error occured " + jqXHR.status);
