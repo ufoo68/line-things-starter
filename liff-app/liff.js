@@ -284,7 +284,7 @@ function getStatus() {
         dataType : "json",
     }).done(function(data) {
         console.log(JSON.stringify(data));
-        $("#test").text(data.title);
+        $("#test").text(JSON.stringify(data));
         if (data.result == 0) {
             console.log("device run!!!");
             deviceRun();
