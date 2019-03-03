@@ -290,7 +290,7 @@ function getStatus() {
             deviceRun();
         }
     }).fail(function(jqXHR, textStatus) {
-        console.log("error occured");
+        console.log(URI + ": error occured " + jqXHR.status);
         $("#test").text(URI + ": error occured " + jqXHR.status);
     });
 }
