@@ -291,7 +291,7 @@ function getStatus() {
         }
     }).fail(function(jqXHR, textStatus) {
         console.log("error occured");
-        $("#test").text(URI + ": error occured " + textStatus);
+        $("#test").text(URI + ": error occured " + jqXHR.status);
     });
 }
 
